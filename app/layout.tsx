@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ModalProvider } from "@/components/providers/modal-provider";
+import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  weight : ["100" , "200" , "300" , "400" , "500" , "600" , "700" , "800" , "900"],
+  subsets : ["latin"]
+})
 
 export const metadata: Metadata = {
   title: "Admin Dashboard",
@@ -17,9 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <ModalProvider />
           {children}
+          <Toaster />
       </body>
     </html>
   );
