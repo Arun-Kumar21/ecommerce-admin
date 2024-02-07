@@ -19,11 +19,14 @@ import { RegisterSchema } from "@/schema";
 
 import * as z from "zod";
 import { FormError } from "@/components/form-error";
-import { env } from "process";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const Register = () => {
   const [isError, setIsError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+
+  const router = useRouter();  
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -38,6 +41,10 @@ const Register = () => {
     try {
       setIsLoading(true);
       await axios.post("/api/register", data);
+
+      signIn("credentials" , {
+        data
+      })
       
     } catch (error) {
       setIsError(true);

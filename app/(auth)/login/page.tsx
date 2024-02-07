@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useForm } from "react-hook-form";
 
@@ -23,13 +23,16 @@ import { Button } from "@/components/ui/button";
 import { CardWrapper } from "@/app/_components/auth/card-wrapper";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import axios from "axios";
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const { toast } = useToast();
 
+  const session = useSession();
+
+  const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
 
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -39,6 +42,12 @@ const LoginForm = () => {
       password: "",
     },
   });
+
+  useEffect(()=>{
+    if (session?.status === "authenticated") {
+      router.push("/dashboard");
+    }
+  },[session?.status , router])
 
   const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
     setIsLoading(true);
@@ -62,6 +71,7 @@ const LoginForm = () => {
           description: "You have been logged in",
           duration: 3000,
         })
+        router.push("/dashboard");
       }
     })
     .catch((error)=>{
