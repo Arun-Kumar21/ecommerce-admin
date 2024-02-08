@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useTransition } from "react";
 
 import { useForm } from "react-hook-form";
 
@@ -8,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { LoginSchema } from "@/schema";
 
-import { useToast } from "@/components/ui/use-toast";
 import {
   Form,
   FormControl,
@@ -21,19 +20,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { CardWrapper } from "@/app/_components/auth/card-wrapper";
-import { FormError } from "@/components/form-error";
-import { FormSuccess } from "@/components/form-success";
+import { signIn } from "@/auth";
+import { AuthError } from "next-auth";
+import toast from "react-hot-toast";
+import { login } from "@/actions/login";
 
-import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
-  const { toast } = useToast();
-
-  const session = useSession();
-
-  const router = useRouter();
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isPending , startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -43,42 +37,17 @@ const LoginForm = () => {
     },
   });
 
-  useEffect(()=>{
-    if (session?.status === "authenticated") {
-      router.push("/dashboard");
-    }
-  },[session?.status , router])
-
   const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
-    setIsLoading(true);
-
-    signIn("credentials" , {
-      ...data , 
-      redirect: false,
-    })
-    .then((res)=>{
-      if (res?.error) {
-        toast({
-          title: "Invalid Credentials",
-          description: "Invalid email or password",
-          duration: 3000,
-        })
-      }
-
-      if (res?.ok) {
-        toast({
-          title: "Login Successful",
-          description: "You have been logged in",
-          duration: 3000,
-        })
-        router.push("/dashboard");
-      }
-    })
-    .catch((error)=>{
-      console.error("LOGIN_POST", error);
-    })
-    .finally(()=>{
-      setIsLoading(false);
+    startTransition(()=>{
+      login(data).
+      then((req) => {
+        if (req?.error) {
+          toast.error(req.error);
+        } 
+        if (req.success) {
+          toast.success(req.success);
+        }
+      })
     })
   };
 
@@ -124,9 +93,7 @@ const LoginForm = () => {
               )}
             />
           </div>
-          <FormError message="" />
-          <FormSuccess message="" />
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button type="submit" className="w-full" disabled={isPending}>
             Login
           </Button>
         </form>

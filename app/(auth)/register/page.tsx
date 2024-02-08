@@ -1,7 +1,6 @@
 "use client";
-import React from "react";
+import React, { useTransition } from "react";
 
-import axios from "axios";
 import { CardWrapper } from "@/app/_components/auth/card-wrapper";
 import { useForm } from "react-hook-form";
 import {
@@ -18,15 +17,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema } from "@/schema";
 
 import * as z from "zod";
-import { FormError } from "@/components/form-error";
+import { register } from "@/actions/register";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
 
 const Register = () => {
-  const [isError, setIsError] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
-
-  const router = useRouter();  
+  const [isPending , startTransition] = useTransition();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -38,20 +35,18 @@ const Register = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof RegisterSchema>) => {
-    try {
-      setIsLoading(true);
-      await axios.post("/api/register", data);
-
-      signIn("credentials" , {
-        data
+    startTransition(()=>{
+      register(data).
+      then((req) => {
+        if (req?.error) {
+          toast.error(req.error);
+        } 
+        if (req?.success) {
+          toast.success(req.success);
+          router.push("/login");
+        }
       })
-      
-    } catch (error) {
-      setIsError(true);
-      console.error("REGISTER_POST", error);
-    } finally {
-      setIsLoading(false);
-    }
+    })
   };
 
   return (
@@ -114,8 +109,7 @@ const Register = () => {
               )}
             />
           </div>
-          {isError && <FormError message="Something went wrong" />}
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button type="submit" className="w-full" disabled={isPending}>
             Register
           </Button>
         </form>

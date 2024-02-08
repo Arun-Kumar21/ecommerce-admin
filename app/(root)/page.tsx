@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from "react";
-
 import { usestoreModal } from "@/hooks/use-store-modal";
 
 const CreateStorePage = () => {
@@ -14,7 +13,7 @@ const CreateStorePage = () => {
     }
   }, [isOpen, onOpen]);
 
-  return <div>Root Page</div>;
+  return <div></div>;
 };
 
 export default CreateStorePage;
