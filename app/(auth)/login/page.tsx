@@ -80,35 +80,6 @@ const LoginForm = () => {
     .finally(()=>{
       setIsLoading(false);
     })
-
-    /* 
-    try {
-      setIsLoading(true);
-      const res = await axios.post("/api/login", data);
-
-      if (res.status === 200) {
-        toast({
-          title: "Login Successful",
-          description: "You have been logged in",
-          duration: 3000,
-        })
-        console.log(res.data);
-      }
-
-      if (res.status === 400) {
-        toast({
-          title: "Invalid Credentials",
-          description: "Invalid email or password",
-          duration: 3000,
-        });
-      } 
-
-    } catch (error) {
-      console.error("LOGIN_POST", error);
-    } finally {
-      setIsLoading(false);
-    } 
-    */
   };
 
   return (

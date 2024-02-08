@@ -8,6 +8,6 @@ export default withAuth({
 
 export const config = {
   matcher : [
-    "/dashboard/:path*"
+    "/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"
   ]
 }
