@@ -20,14 +20,16 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { CardWrapper } from "@/app/_components/auth/card-wrapper";
-import { signIn } from "@/auth";
-import { AuthError } from "next-auth";
 import toast from "react-hot-toast";
 import { login } from "@/actions/login";
+import {redirect, useRouter} from "next/navigation";
+
 
 
 const LoginForm = () => {
   const [isPending , startTransition] = useTransition();
+
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -46,6 +48,7 @@ const LoginForm = () => {
         } 
         if (req.success) {
           toast.success(req.success);
+          router.push("/");
         }
       })
     })
