@@ -2,7 +2,7 @@ import {auth} from "@/auth";
 import {redirect} from "next/navigation";
 import db from "@/lib/db";
 import {Navbar} from "@/app/_components/Navbar/navbar";
-import {Sidebar} from "@/app/_components/Navbar/Sidebar";
+import {MainNav} from "@/app/_components/Navbar/main-nav";
 
 export default async function DashBoardLayout({
     children,
@@ -33,17 +33,8 @@ export default async function DashBoardLayout({
 
     return (
         <>
-            <div>
-                <Sidebar />
-            </div>
-
-            <div>
-                <Navbar />
-            </div>
-
-            <div className={"md:ml-56 p-4"}>
-                {children}
-            </div>
+          <MainNav />
+          {children}
         </>
     )
 
