@@ -69,7 +69,7 @@ const ModifyStore = ({
   }
 
   return(
-    <div className={"flex items-start justify-between py-4"}>
+    <div className={"flex items-center justify-between py-4"}>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className={"space-y-4"}>
             <FormField

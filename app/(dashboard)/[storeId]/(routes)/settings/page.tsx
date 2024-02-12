@@ -29,7 +29,7 @@ const UserSettings = async ({
     <div className={"p-4 md:ml-12"}>
       <PageHeader title={"Settings"}  description={"Manage store prefernce"} />
 
-      <div className={"my-8 border-[1px] p-4 md:pr-8 w-1/2 rounded-md"}>
+      <div className={"my-8 border-[1px] p-4 md:pr-8 lg:w-1/2 rounded-md"}>
         <ModifyStore initialData={store} />
       </div>
     </div>
