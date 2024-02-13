@@ -39,7 +39,7 @@ export const MainNav = async () => {
           <ChangeStore items={stores}/>
         </div>
 
-       <div className={"hidden md:flex"}>
+       <div className={"hidden md:flex space-x-2"}>
          <ModeToggle />
          <UserAvatar name={userLogo} />
        </div>
