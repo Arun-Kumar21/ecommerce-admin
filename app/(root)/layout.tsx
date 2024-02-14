@@ -21,7 +21,7 @@ export default async function HomeLayout({
         });
 
         if (store) {
-            redirect(`${store.id}`);
+            redirect(`/${store.id}`);
         }
 
         return (

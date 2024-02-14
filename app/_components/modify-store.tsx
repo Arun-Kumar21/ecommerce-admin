@@ -64,7 +64,7 @@ const ModifyStore = ({
       toast.success("Successfully deleted store");
     } catch (error) {
       console.log("DELETE_STORE" , error);
-      toast.error("Something Went Wrong");
+      toast.error("Make sure you removed all products and categories first");
     } finally {
       setLoading(false);
     }
