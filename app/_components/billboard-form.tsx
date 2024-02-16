@@ -4,7 +4,7 @@ import {Billboard} from "@prisma/client";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 
-interface modifyStoreProps {
+interface BillboardFormProps {
   initialData : Billboard | null ;
 }
 
@@ -29,7 +29,7 @@ const formSchema = z.object({
 
 const BillboardForm = ({
   initialData
-}:modifyStoreProps) => {
+}:BillboardFormProps) => {
 
   const params = useParams();
   const router = useRouter();
