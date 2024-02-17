@@ -59,7 +59,7 @@ const BillboardForm = ({
       router.refresh();
       toast.success(initialData ? "Billboard Updated" : "Billboard Created")
     } catch (error) {
-      console.log("PATCH_STORE" , error);
+      console.log("PATCH_BILLBOARD" , error);
       toast.error("Something Want Wrong");
     } finally {
       setLoading(false);
@@ -68,8 +68,6 @@ const BillboardForm = ({
 
 
   return(
-    <>
-
       <div className={"flex items-center justify-between py-4"}>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className={"space-y-4"}>
@@ -105,23 +103,10 @@ const BillboardForm = ({
                 </FormItem>
               )}
             />
-          <div className={"flex items-center gap-x-4"}>
             <Button type="submit" disabled={loading}>{initialData ? "Update Billboard" : "Create Billboard"}</Button>
-            {initialData && (
-              <Button
-                disabled={loading}
-                variant="destructive"
-                size="sm"
-                onClick={() => setOpen(true)}
-              >
-                Delete Billboard
-              </Button>
-            )}
-          </div>
           </form>
         </Form>
       </div>
-    </>
   );
 };
 

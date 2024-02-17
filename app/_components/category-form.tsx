@@ -61,7 +61,7 @@ const CategoryForm = ({
       router.refresh();
       toast.success(initialData ? "Category Updated" : "Category Created")
     } catch (error) {
-      console.log("PATCH_STORE" , error);
+      console.log("PATCH_CATEGORY" , error);
       toast.error("Something Want Wrong");
     } finally {
       setLoading(false);
@@ -72,7 +72,7 @@ const CategoryForm = ({
       <div className={"py-4"}>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className={"space-y-4 md:w-1/2 my-3"}>
-            <div className={"flex items-center justify-between"}>
+            <div className={"md:flex items-center justify-between w-1/2 md:w-full"}>
               <FormField
                 control={form.control}
                 name="name"
