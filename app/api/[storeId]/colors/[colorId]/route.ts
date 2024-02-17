@@ -4,28 +4,28 @@ import db from "@/lib/db";
 
 export async function GET(
   req : Request ,
-  { params } : { params : { sizeId : string }}
+  { params } : { params : { colorId : string }}
 ){
   try {
-    if (!params.sizeId) {
-      return new NextResponse("Size Id missing" , {status:400});
+    if (!params.colorId) {
+      return new NextResponse("Color Id missing" , {status:400});
     }
 
-    const size = await db.size.findMany({
+    const color = await db.color.findMany({
       where : {
-        id : params.sizeId
+        id : params.colorId
       }
     })
 
-    return NextResponse.json(size);
+    return NextResponse.json(color);
   } catch (error) {
-    console.log("SIZE-ID_GET",error);
+    console.log("COLOR-ID_GET",error);
   }
 }
 
 export async function DELETE (
   req : Request,
-  { params } : { params : { storeId : string  , sizeId : string} }
+  { params } : { params : { storeId : string  , colorId : string} }
 ) {
   try {
     const session = await auth();
@@ -35,7 +35,7 @@ export async function DELETE (
       return new NextResponse("UnAuthorized" , {status : 401});
     }
 
-    if (!params.storeId || !params.sizeId) {
+    if (!params.storeId || !params.colorId) {
       return new NextResponse("Missing Id" , {status:400});
     }
 
@@ -50,23 +50,23 @@ export async function DELETE (
       return new NextResponse("Unauthorized", { status: 405 });
     }
 
-    const size = await  db.size.deleteMany({
+    const color = await  db.color.deleteMany({
       where : {
-        id : params.sizeId,
+        id : params.colorId,
       }
     })
 
-    return NextResponse.json(size);
+    return NextResponse.json(color);
 
   } catch (error) {
-    console.log("SIZE-ID_DELETE" , error);
+    console.log("COLOR-ID_DELETE" , error);
     return new NextResponse("Internal Server Error Occur" , {status : 500});
   }
 }
 
 export async function PATCH(
   req : Request ,
-  { params } : { params : {storeId : string , sizeId : string}}
+  { params } : { params : {storeId : string , colorId : string}}
 ) {
   try{
     const session = await auth();
@@ -83,13 +83,13 @@ export async function PATCH(
       return new NextResponse("Missing details" , {status:400});
     }
 
-    if (!params.storeId || !params.sizeId) {
+    if (!params.storeId || !params.colorId) {
       return new NextResponse("Missing Id's" , {status:400});
     }
 
-    const size = await db.size.updateMany({
+    const color = await db.color.updateMany({
       where : {
-        id : params.sizeId,
+        id : params.colorId,
         storeId : params.storeId
       } ,
       data : {
@@ -98,9 +98,9 @@ export async function PATCH(
       }
     })
 
-    return NextResponse.json(size);
+    return NextResponse.json(color);
   } catch (error) {
-    console.log("SIZE-ID_PATCH" , error);
+    console.log("COLOR-ID_PATCH" , error);
     return new NextResponse("Internal Error Occur" , {status : 500});
   }
 }

@@ -14,13 +14,10 @@ import {
 
 import { Input } from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
-import {Trash} from "lucide-react";
 import {useState} from "react";
 import axios from "axios";
 import {useParams, useRouter} from "next/navigation";
 import toast from "react-hot-toast";
-import AlertModal from "@/components/modals/alert-modal";
-import ImageUpload from "@/app/_components/image-upload";
 
 const formSchema = z.object({
   name : z.string().min(3 ),
@@ -59,7 +56,7 @@ const SizeForm = ({
       toast.success(initialData ? "Size Updated" : "Size Created")
     } catch (error) {
       console.log("PATCH_SIZE" , error);
-      toast.error("Something Want Wrong");
+      toast.error("Something Went Wrong");
     } finally {
       setLoading(false);
     }
