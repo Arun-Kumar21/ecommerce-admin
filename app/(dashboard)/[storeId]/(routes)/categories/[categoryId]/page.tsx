@@ -24,6 +24,8 @@ const CategoryIdPage = async ({
       <div className={"my-2"}>
         <PageHeader title={category ? "Update Category" : "Create Category"} description={"Manage your Category"} />
       </div>
+
+
       <Separator />
 
       <CategoryForm initialData={category} billboards={billboard}/>

@@ -35,6 +35,7 @@ const BillboardForm = ({
   const router = useRouter();
 
   const [loading , setLoading] = useState(false);
+  const [open , setOpen] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver : zodResolver(formSchema),
@@ -54,8 +55,8 @@ const BillboardForm = ({
         await axios.post(`/api/${params.storeId}/billboards` , data);
       }
 
-      router.refresh();
       router.push(`/${params.storeId}/billboards`);
+      router.refresh();
       toast.success(initialData ? "Billboard Updated" : "Billboard Created")
     } catch (error) {
       console.log("PATCH_STORE" , error);
@@ -65,50 +66,63 @@ const BillboardForm = ({
     }
   }
 
+
   return(
     <>
+
       <div className={"flex items-center justify-between py-4"}>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className={"space-y-4"}>
-              <FormField
-                control={form.control}
-                name="imageUrl"
-                render={({field}) => (
-                  <FormItem>
-                    <FormLabel>Billboard Image</FormLabel>
-                    <FormControl>
-                      <ImageUpload
-                        value={field.value ? [field.value] : []}
-                        disabled={loading}
-                        onChange={(url) => field.onChange(url)}
-                        onRemove={(url) => field.onChange("")}
-                      />
-                    </FormControl>
-                    <FormMessage/>
-                  </FormItem>
-                )}
-              />
+            <FormField
+              control={form.control}
+              name="imageUrl"
+              render={({field}) => (
+                <FormItem>
+                  <FormLabel>Billboard Image</FormLabel>
+                  <FormControl>
+                    <ImageUpload
+                      value={field.value ? [field.value] : []}
+                      disabled={loading}
+                      onChange={(url) => field.onChange(url)}
+                      onRemove={(url) => field.onChange("")}
+                    />
+                  </FormControl>
+                  <FormMessage/>
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="label"
-                render={({field}) => (
-                  <FormItem>
-                    <FormLabel>Label</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Billboard label" {...field}/>
-                    </FormControl>
-                    <FormMessage/>
-                  </FormItem>
-                )}
-              />
-
-              <Button type="submit" disabled={loading}>{initialData ? "Update Billboard" : "Create Billboard"}</Button>
+            <FormField
+              control={form.control}
+              name="label"
+              render={({field}) => (
+                <FormItem>
+                  <FormLabel>Label</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Billboard label" {...field}/>
+                  </FormControl>
+                  <FormMessage/>
+                </FormItem>
+              )}
+            />
+          <div className={"flex items-center gap-x-4"}>
+            <Button type="submit" disabled={loading}>{initialData ? "Update Billboard" : "Create Billboard"}</Button>
+            {initialData && (
+              <Button
+                disabled={loading}
+                variant="destructive"
+                size="sm"
+                onClick={() => setOpen(true)}
+              >
+                Delete Billboard
+              </Button>
+            )}
+          </div>
           </form>
         </Form>
       </div>
     </>
-);
+  );
 };
 
 export default BillboardForm;

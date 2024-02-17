@@ -20,6 +20,9 @@ import axios from "axios";
 import {useParams, useRouter} from "next/navigation";
 import toast from "react-hot-toast";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
+import AlertModal from "@/components/modals/alert-modal";
+import {Trash} from "lucide-react";
+import {Separator} from "@/components/ui/separator";
 
 const formSchema = z.object({
   name : z.string().min(3 ),
@@ -66,55 +69,56 @@ const CategoryForm = ({
   }
 
   return(
-    <>
       <div className={"py-4"}>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className={"space-y-4 flex items-center md:w-1/2 justify-between my-3"}>
-            <FormField
-              control={form.control}
-              name="name"
-              render={({field}) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Category name" {...field}/>
-                  </FormControl>
-                  <FormMessage/>
-                </FormItem>
-              )}
-            />
+          <form onSubmit={form.handleSubmit(onSubmit)} className={"space-y-4 md:w-1/2 my-3"}>
+            <div className={"flex items-center justify-between"}>
+              <FormField
+                control={form.control}
+                name="name"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Category name" {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="billboardId"
-              render={({field}) => (
-                <FormItem>
-                  <FormLabel>Billboard</FormLabel>
-                  <FormControl>
-                    <Select disabled={loading} onValueChange={field.onChange} value={field.value} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue defaultValue={field.value} placeholder={"Select a Billboard"}/>
-                        </SelectTrigger>
-                      </FormControl>
+              <FormField
+                control={form.control}
+                name="billboardId"
+                render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Billboard</FormLabel>
+                    <FormControl>
+                      <Select disabled={loading} onValueChange={field.onChange} value={field.value}
+                              defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue defaultValue={field.value} placeholder={"Select a Billboard"}/>
+                          </SelectTrigger>
+                        </FormControl>
                         <SelectContent>
-                          {billboards.map((billboard)=>(
+                          {billboards.map((billboard) => (
                             <SelectItem value={billboard.id} key={billboard.id}>
                               {billboard.label}
                             </SelectItem>
                           ))}
                         </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage/>
-                </FormItem>
-              )}
-            />
+                      </Select>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+              />
+            </div>
+           <Button type="submit" disabled={loading}>{initialData ? "Update Category" : "Create Category"}</Button>
           </form>
-            <Button type="submit" disabled={loading}>{initialData ? "Update Category" : "Create Category"}</Button>
         </Form>
       </div>
-    </>
   );
 };
 
