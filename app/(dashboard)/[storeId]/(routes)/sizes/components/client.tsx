@@ -42,7 +42,7 @@ const SizesClient = ({initialData} : SizeClientProps) => {
         <Separator />
 
         <div className={"my-4 p-2"}>
-          <DataTable searchKey={"name"} columns={columns} data={sizeData} placeholder={"Search Sizes"}/>
+          <DataTable searchKey={"name"} columns={columns} data={sizeData} placeholder={"Sizes"}/>
         </div>
       </div>
   )

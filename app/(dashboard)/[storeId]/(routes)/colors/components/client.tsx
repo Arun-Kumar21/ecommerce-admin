@@ -42,7 +42,7 @@ const ColorsClient = ({initialData} : ColorClientProps) => {
         <Separator />
 
         <div className={"my-4 p-2"}>
-          <DataTable searchKey={"name"} columns={columns} data={colorData} placeholder={"Search Colors"}/>
+          <DataTable searchKey={"name"} columns={columns} data={colorData} placeholder={"Colors"}/>
         </div>
       </div>
   )

@@ -40,7 +40,7 @@ const BillboardClient = ({initialData} : BillboardClientProps) => {
         <Separator />
 
         <div className={"my-4 p-2"}>
-          <DataTable searchKey={"label"} columns={columns} data={billboardData} placeholder={"Search Billboards"}/>
+          <DataTable searchKey={"label"} columns={columns} data={billboardData} placeholder={"Billboards"}/>
         </div>
       </div>
   )
