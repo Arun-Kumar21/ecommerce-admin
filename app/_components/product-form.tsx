@@ -248,29 +248,6 @@ const ProductForm = ({
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="isArchived"
-              render={({field}) => (
-                <FormItem className={"flex flex-row items-center space-x-3 space-y-0 rounded-md border p-4"}>
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <div className={"space-y-1 leading-none"}>
-                    <FormLabel>
-                      Archived
-                    </FormLabel>
-                    <FormDescription>
-                      This product will archived
-                    </FormDescription>
-                  </div>
-                </FormItem>
-              )}
-            />
-
           </div>
             <Button type="submit" disabled={loading}>{initialData ? "Update Product" : "Add Product"}</Button>
         </form>

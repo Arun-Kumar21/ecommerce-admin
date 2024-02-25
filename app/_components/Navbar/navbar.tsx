@@ -62,12 +62,12 @@ export const Navbar = () => {
       active: pathname === `/${params.storeId}/orders`,
       icon : <ArrowLeftRight className={"w-6 h-6 text-fuchsia-500"}/>
     },
-    {
-      href: `/${params.storeId}/settings`,
-      label: 'Settings',
-      active: pathname === `/${params.storeId}/settings`,
-      icon : <Settings className={"w-6 h-6 text-neutral-700"}/>
-    },
+    // {
+    //   href: `/${params.storeId}/settings`,
+    //   label: 'Settings',
+    //   active: pathname === `/${params.storeId}/settings`,
+    //   icon : <Settings className={"w-6 h-6 text-neutral-700"}/>
+    // },
   ]
 
   return (

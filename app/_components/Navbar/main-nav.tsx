@@ -39,8 +39,8 @@ export const MainNav = async () => {
       </div>
 
       <div className={"flex items-center justify-between md:gap-x-3 gap-x-2"}>
-        <div className={"hidden md:block"}>
-          <ChangeStore items={stores}/>
+        <div  className={"hidden md:block"}>
+          {/*<ChangeStore items={stores}/>*/}
         </div>
 
        <div className={"hidden md:flex space-x-2"}>
