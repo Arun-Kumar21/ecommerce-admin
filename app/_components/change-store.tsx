@@ -3,7 +3,7 @@
 import React, {useState} from "react";
 import {useParams, useRouter} from "next/navigation";
 import { Store } from "@prisma/client"
-import {Check, ChevronsUpDown, Plus, Store as StoreIcon} from "lucide-react";
+import {Check, ChevronsUpDown, Package, Plus, Store as StoreIcon} from "lucide-react";
 
 import {usestoreModal} from "@/hooks/use-store-modal";
 
@@ -58,7 +58,7 @@ export default function ChangeStore ({
         <Button variant={"outline"} size={"sm"} role={"combobox"} aria-expanded={open} aria-label={"Select a Store"}
           className={cn("w-[175px] justify-between" , className)}
         >
-          <StoreIcon className={"mr-2 h-4 w-4"}/>
+          <Package className={"mr-2 h-4 w-4"}/>
           {activeStore?.label}
           <ChevronsUpDown  className={"h-4 w-4 ml-auto shrink-0 opacity-50"}/>
         </Button>
@@ -73,7 +73,7 @@ export default function ChangeStore ({
                 <CommandItem key={store.value}
                   onSelect={()=>onStoreSelect(store)}
                 >
-                  <StoreIcon className={"mr-2 w-4 h-4"}/>
+                  <Package className={"mr-2 w-4 h-4"}/>
                   {store.label}
                   <Check
                     className={cn(

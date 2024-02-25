@@ -8,6 +8,7 @@ import {
  } from "@/components/ui/card";
 import { Header } from "./header";
 import { BackButton } from "./back-button";
+import {useEffect, useState} from "react";
 
 interface CardWrapperProps {
   children: React.ReactNode;
@@ -22,6 +23,14 @@ export const CardWrapper  = ({
   backButtonLabel,
   backButtonHref
 }:CardWrapperProps) => {
+  const [isMounted , setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, []);
+
+  if (!isMounted) return null;
+
   return (
     <Card className="w-[350px] shadow-md">
       <CardHeader>

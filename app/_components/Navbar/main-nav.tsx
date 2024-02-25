@@ -6,6 +6,8 @@ import ChangeStore from "@/app/_components/change-store";
 import {ModeToggle} from "@/app/_components/mode-toggle";
 import {UserAvatar} from "@/app/_components/user-avatar/avatar";
 import MobileSidebar from "@/app/_components/Navbar/mobile-sidebar";
+import Logo from "@/components/logo";
+import Link from "next/link";
 
 export const MainNav = async () => {
   const session = await auth();
@@ -28,7 +30,9 @@ export const MainNav = async () => {
 
   return (
     <div className={"w-full flex items-center justify-between h-16 border-b-2 px-6"}>
-      <div className={"LOGO"}>LOGO</div>
+        <Link href={"/"} className={"w-28"}>
+          <Logo />
+        </Link>
 
       <div className={"hidden lg:block"}>
         <Navbar/>
@@ -40,9 +44,7 @@ export const MainNav = async () => {
         </div>
 
        <div className={"hidden md:flex space-x-2"}>
-         <ModeToggle />
-         <UserAvatar name={userLogo} />
-       </div>
+         <UserAvatar name={userLogo} /></div>
 
         <div className={"block lg:hidden"}>
           <MobileSidebar />

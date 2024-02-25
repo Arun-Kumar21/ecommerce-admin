@@ -14,6 +14,9 @@ export async function GET(
     const category = await db.category.findMany({
       where : {
         id : params.categoryId
+      },
+      include : {
+        billboard : true
       }
     })
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { useTransition } from "react";
+import React, {useEffect, useState, useTransition} from "react";
 
 import { useForm } from "react-hook-form";
 
@@ -23,11 +23,13 @@ import { CardWrapper } from "@/app/_components/auth/card-wrapper";
 import toast from "react-hot-toast";
 import { login } from "@/actions/login";
 import {redirect, useRouter} from "next/navigation";
+import {Eye, EyeOff} from "lucide-react";
 
 
 
 const LoginForm = () => {
   const [isPending , startTransition] = useTransition();
+  const [showPassword , setShowPassword] = useState("password");
 
   const router = useRouter();
 
@@ -89,7 +91,10 @@ const LoginForm = () => {
                 <FormItem>
                   <FormLabel htmlFor="email">Password</FormLabel>
                   <FormControl>
-                    <Input type="password" {...field} placeholder="*********" />
+                    <form className={"flex items-center justify-between w-full gap-x-4" }>
+                      <Input type={showPassword} {...field} placeholder="*********" />
+                      {showPassword === "password" ?  <Eye className={"w-6 h-6"} onClick={() => setShowPassword("text")}/> : <EyeOff className={"w-6 h-6"} onClick={()=>setShowPassword("password")}/>}
+                    </form>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import Logo from "@/components/logo";
 
 interface HeaderProps {
   label: string;
@@ -9,9 +10,9 @@ export const Header = ({
 }:HeaderProps)=> {
   return (
     <div className="w-full flex flex-col gap-y-4 items-center justify-center">
-      <h1 className={cn("text-3xl font-semibold")}>
-        BOUTIQUE
-      </h1>
+      <div className="w-28">
+        <Logo />
+      </div>
       <p className="text-muted-foreground text-sm">
         {label}
       </p>

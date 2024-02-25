@@ -1,5 +1,6 @@
 import db from "@/lib/db";
 import BillboardClient from "@/app/(dashboard)/[storeId]/(routes)/billboards/components/client";
+import axios from "axios";
 
 const BillboardsPage = async ({params} : {params : { storeId : string }}) => {
 
