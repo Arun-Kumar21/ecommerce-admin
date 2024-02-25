@@ -1,4 +1,3 @@
-/*
 import Stripe from "stripe";
 
 import db from "@/lib/db";
@@ -16,6 +15,7 @@ export async function OPTIONS() {
   return NextResponse.json({}, { headers: corsHeaders });
 }
 
+/*
 export async function POST(
   req : NextResponse ,
   {params} : {params : {storeId : string}}
