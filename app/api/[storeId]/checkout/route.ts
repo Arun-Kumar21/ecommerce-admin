@@ -1,3 +1,4 @@
+/*
 import Stripe from "stripe";
 
 import db from "@/lib/db";
@@ -83,3 +84,4 @@ export async function POST(
     headers: corsHeaders
   });
 }
+*/
