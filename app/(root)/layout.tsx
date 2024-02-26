@@ -3,30 +3,30 @@ import {redirect} from "next/navigation";
 import db from "@/lib/db";
 
 export default async function HomeLayout({
-    children
-}: { children : React.ReactNode}) {
-        const session = await auth();
-        const userId = session?.user?.id;
+                                           children
+                                         }: { children: React.ReactNode }) {
+  const session = await auth();
+  const userId = session?.user?.id;
 
-        // const router.push
+  // const router.push
 
-        if (!userId) {
-            redirect("/login");
-        }
+  if (!userId) {
+    redirect("/login");
+  }
 
-        const store = await db.store.findFirst({
-            where : {
-                userId
-            }
-        });
+  const store = await db.store.findFirst({
+    where: {
+      userId
+    }
+  });
 
-        if (store) {
-            redirect(`/${store.id}`);
-        }
+  if (store) {
+    redirect(`/${store.id}`);
+  }
 
-        return (
-            <>
-                {children}
-            </>
-        )
+  return (
+    <>
+      {children}
+    </>
+  )
 }

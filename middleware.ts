@@ -8,7 +8,6 @@ import {
   apiAuthPrefix,
 } from '@/routes'
 
-
 const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
@@ -32,7 +31,6 @@ export default auth((req) => {
   if (!isLoggedIn) {
     return Response.redirect(new URL("/login" , nextUrl));
   }
-
   return null;
 })
 
